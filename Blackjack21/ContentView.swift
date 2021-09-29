@@ -9,8 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack{
+            Background()
+            VStack{
+                Text("Hello, world!")
+                    .padding()
+            }
+        }
+    }
+}
+
+struct Background: View {
+    var body: some View {
+        LinearGradient(gradient: Gradient(colors: [.green, .green, .green, .black]), startPoint: .topLeading, endPoint: .bottomTrailing).edgesIgnoringSafeArea(.all)
     }
 }
 
