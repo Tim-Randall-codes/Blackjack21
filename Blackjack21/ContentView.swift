@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    let randomCard = originalDeck[Int.random(in: 0...originalDeck.count)]
     var body: some View {
         ZStack{
             Background()
             VStack{
                 Text("Hello, world!")
                     .padding()
+                Image(randomCard.image).resizable()
+                    .frame(width: 100, height: 150)
             }
         }
     }

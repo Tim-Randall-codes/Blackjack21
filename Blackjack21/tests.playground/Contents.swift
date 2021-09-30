@@ -1,11 +1,6 @@
-//
-//  stuff.swift
-//  Blackjack21
-//
-//  Created by Tim Randall on 29/9/21.
-//
+import UIKit
 
-import Foundation
+var str = "Hello, playground"
 
 struct Card {
     var name: String
@@ -17,7 +12,6 @@ struct Card {
         self.image = image
     }
 }
-
 let originalDeck: Array = [
     Card(name: "1d", value: 1, image: "AD"),
     Card(name: "1h", value: 1, image: "AH"),
@@ -71,4 +65,5 @@ let originalDeck: Array = [
     Card(name: "kh", value: 10, image: "KH"),
     Card(name: "kc", value: 10, image: "KC"),
     Card(name: "ks", value: 10, image: "KS")]
+let randomCard = originalDeck[Int.random(in: 0...originalDeck.count)]
 
