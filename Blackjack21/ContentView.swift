@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var userDeck = []
     let randomCard = originalDeck[Int.random(in: 0...originalDeck.count)]
+    @State var testSring: String = ""
     var body: some View {
         ZStack{
             Background()
@@ -17,8 +19,21 @@ struct ContentView: View {
                     .padding()
                 Image(randomCard.image).resizable()
                     .frame(width: 100, height: 150)
+                Text(testSring).padding()
+                Button(action:{
+                    takeCardsFromDeck()
+                }, label: {
+                    Text("do test")
+                })
             }
         }
+    }
+    func takeCardsFromDeck () {
+        let randomNumber: Int = Int.random(in: 0...originalDeck.count)
+        let drawnCard = originalDeck[randomNumber]
+        userDeck.append(drawnCard)
+        originalDeck.remove(at: randomNumber)
+        print(userDeck)
     }
 }
 

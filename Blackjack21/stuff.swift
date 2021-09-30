@@ -18,7 +18,7 @@ struct Card {
     }
 }
 
-let originalDeck: Array = [
+var originalDeck: Array = [
     Card(name: "1d", value: 1, image: "AD"),
     Card(name: "1h", value: 1, image: "AH"),
     Card(name: "1c", value: 1, image: "AC"),
