@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var userDeck = []
+    @StateObject var viewRouter: ViewRouter
     let randomCard = originalDeck[Int.random(in: 0...originalDeck.count)]
     @State var testSring: String = ""
     var body: some View {
@@ -37,14 +38,10 @@ struct ContentView: View {
     }
 }
 
-struct Background: View {
-    var body: some View {
-        LinearGradient(gradient: Gradient(colors: [.green, .green, .green, .black]), startPoint: .topLeading, endPoint: .bottomTrailing).edgesIgnoringSafeArea(.all)
-    }
-}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(viewRouter: ViewRouter())
     }
 }

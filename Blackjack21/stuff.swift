@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Card {
     var name: String
@@ -72,3 +73,12 @@ var originalDeck: Array = [
     Card(name: "kc", value: 10, image: "KC"),
     Card(name: "ks", value: 10, image: "KS")]
 
+struct Background: View {
+    var body: some View {
+        LinearGradient(gradient: Gradient(colors: [.green, .green, .green, .black]), startPoint: .topLeading, endPoint: .bottomTrailing).edgesIgnoringSafeArea(.all)
+    }
+}
+
+class ViewRouter: ObservableObject {
+    @Published var currentPage: Int = 2
+}
