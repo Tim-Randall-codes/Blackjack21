@@ -80,5 +80,38 @@ struct Background: View {
 }
 
 class ViewRouter: ObservableObject {
-    @Published var currentPage: Int = 2
+    @Published var currentPage: Int = 1
 }
+
+struct Title: View {
+    var words: String
+    var body: some View {
+        Text(words).padding().font(.largeTitle)
+    }
+}
+
+struct TextWidget: View {
+    var words: String
+    var body: some View {
+        Text(words).padding().font(.system(size: 18, weight: .light, design: .default))
+    }
+}
+
+struct ButtonWidget: View {
+    var words: String
+    var body: some View {
+        Text(words)
+            .padding()
+            .font(.system(size: 18, weight: .bold, design: .default))
+            .background(Color.white)
+            .cornerRadius(30)
+    }
+}
+
+class IntOO: ObservableObject {
+    @Published var num: Int
+    init(num: Int){
+        self.num = num
+    }
+}
+var userMoney = IntOO(num: 100)

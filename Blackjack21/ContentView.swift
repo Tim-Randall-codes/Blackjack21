@@ -8,33 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var userDeck = []
     @StateObject var viewRouter: ViewRouter
-    let randomCard = originalDeck[Int.random(in: 0...originalDeck.count)]
-    @State var testSring: String = ""
+    @State var betString: String = ""
     var body: some View {
         ZStack{
             Background()
             VStack{
-                Text("Hello, world!")
-                    .padding()
-                Image(randomCard.image).resizable()
-                    .frame(width: 100, height: 150)
-                Text(testSring).padding()
+            
+                Title(words: "Blackjack 21")
+                Spacer()
+                TextWidget(words: "You have $\(String(userMoney.num)).")
+                TextWidget(words: "How much would you like to bet?")
+                TextField("Enter bet here", text: $betString)
                 Button(action:{
-                    takeCardsFromDeck()
-                }, label: {
-                    Text("do test")
+                    viewRouter.currentPage = 2
+                }, label:{
+                    ButtonWidget(words: "Gamble On!!")
                 })
+                Spacer()
             }
         }
-    }
-    func takeCardsFromDeck () {
-        let randomNumber: Int = Int.random(in: 0...originalDeck.count)
-        let drawnCard = originalDeck[randomNumber]
-        userDeck.append(drawnCard)
-        originalDeck.remove(at: randomNumber)
-        print(userDeck)
     }
 }
 
