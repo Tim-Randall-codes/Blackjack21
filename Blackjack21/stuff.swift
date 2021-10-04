@@ -19,7 +19,7 @@ struct Card {
     }
 }
 
-var originalDeck: Array = [
+let originalDeck: Array = [
     Card(name: "1d", value: 1, image: "AD"),
     Card(name: "1h", value: 1, image: "AH"),
     Card(name: "1c", value: 1, image: "AC"),
@@ -112,9 +112,14 @@ class IntOO: ObservableObject {
     @Published var num: Float = 0
 }
 
-class userMoneyOO: ObservableObject {
-    @Published var num: Float
-    init (num: Float) {
-        self.num = num
-    }
+class UserMoneyOO: ObservableObject {
+    @Published var num: Float = 100
+}
+
+class OriginalDeckOO: ObservableObject {
+    @Published var deck: Array = originalDeck
+}
+
+class PlayerDeckOO: ObservableObject {
+    @Published var deck: Array = []
 }
