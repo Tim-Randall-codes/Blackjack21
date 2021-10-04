@@ -10,9 +10,10 @@ import SwiftUI
 @main
 struct Blackjack21App: App {
     @StateObject var viewRouter = ViewRouter()
+    @StateObject var bet = IntOO()
     var body: some Scene {
         WindowGroup {
-            MotherView(viewRouter: viewRouter)
+            MotherView(viewRouter: viewRouter, bet: bet)
         }
     }
 }

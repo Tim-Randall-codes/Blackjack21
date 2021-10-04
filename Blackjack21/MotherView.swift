@@ -9,12 +9,13 @@ import SwiftUI
 
 struct MotherView: View {
     @StateObject var viewRouter: ViewRouter
+    @StateObject var bet: IntOO
     var body: some View {
         if viewRouter.currentPage == 1 {
-            ContentView(viewRouter: viewRouter)
+            ContentView(viewRouter: viewRouter, bet: bet)
         }
         else if viewRouter.currentPage == 2 {
-            ContentView2(viewRouter: viewRouter)
+            ContentView2(viewRouter: viewRouter, bet: bet)
         }
         else if viewRouter.currentPage == 3 {
             ContentView3(viewRouter: viewRouter)
@@ -27,6 +28,6 @@ struct MotherView: View {
 
 struct MotherView_Previews: PreviewProvider {
     static var previews: some View {
-        MotherView(viewRouter: ViewRouter())
+        MotherView(viewRouter: ViewRouter(), bet: IntOO())
     }
 }

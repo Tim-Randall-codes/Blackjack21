@@ -67,3 +67,10 @@ let originalDeck: Array = [
     Card(name: "ks", value: 10, image: "KS")]
 let randomCard = originalDeck[Int.random(in: 0...originalDeck.count)]
 
+let stringTest: String = "12.7444"
+if var floatTest = Float(stringTest) {
+    print("the float is \(floatTest)")
+}
+else {
+    print("This string will not turn into a float")
+}

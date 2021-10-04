@@ -109,9 +109,12 @@ struct ButtonWidget: View {
 }
 
 class IntOO: ObservableObject {
-    @Published var num: Int
-    init(num: Int){
+    @Published var num: Float = 0
+}
+
+class userMoneyOO: ObservableObject {
+    @Published var num: Float
+    init (num: Float) {
         self.num = num
     }
 }
-var userMoney = IntOO(num: 100)
