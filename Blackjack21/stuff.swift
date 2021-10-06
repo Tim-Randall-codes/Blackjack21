@@ -73,6 +73,10 @@ let originalDeck: Array = [
     Card(name: "kc", value: 10, image: "KC"),
     Card(name: "ks", value: 10, image: "KS")]
 
+var houseDeck: Array = originalDeck
+var userDeck: Array = [Card]()
+var dealerDeck: Array = [Card]()
+
 struct Background: View {
     var body: some View {
         LinearGradient(gradient: Gradient(colors: [.green, .green, .green, .black]), startPoint: .topLeading, endPoint: .bottomTrailing).edgesIgnoringSafeArea(.all)
@@ -114,12 +118,4 @@ class IntOO: ObservableObject {
 
 class UserMoneyOO: ObservableObject {
     @Published var num: Float = 100
-}
-
-class OriginalDeckOO: ObservableObject {
-    @Published var deck: Array = originalDeck
-}
-
-class PlayerDeckOO: ObservableObject {
-    @Published var deck: Array = []
 }

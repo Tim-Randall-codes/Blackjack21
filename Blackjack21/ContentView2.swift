@@ -11,9 +11,6 @@ struct ContentView2: View {
     @StateObject var viewRouter: ViewRouter
     @StateObject var bet: IntOO
     @StateObject var userMoney: UserMoneyOO
-    @StateObject var houseDeck: OriginalDeckOO
-    @StateObject var userDeck: PlayerDeckOO
-    @StateObject var dealerDeck: PlayerDeckOO
     var body: some View {
         Text("hello world")
     }
@@ -21,6 +18,6 @@ struct ContentView2: View {
 
 struct ContentView2_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView2(viewRouter: ViewRouter(), bet: IntOO(), userMoney: UserMoneyOO(), houseDeck: OriginalDeckOO(), userDeck: PlayerDeckOO(), dealerDeck: PlayerDeckOO())
+        ContentView2(viewRouter: ViewRouter(), bet: IntOO(), userMoney: UserMoneyOO())
     }
 }
