@@ -31,7 +31,11 @@ struct ContentView: View {
                     getBet()
                     getUserDeck()
                     getUserDeck()
+                    getDealerDeck()
+                    getDealerDeck()
                     checkForNaturalsUser()
+                    checkForNaturalsDealer()
+                    viewRouter.currentPage = 2
                 }, label:{
                     ButtonWidget(words: "Gamble On!!")
                 })
@@ -44,8 +48,6 @@ struct ContentView: View {
         if let betFloat = Float(betString) {
             displayMessage = ""
             bet.num = betFloat
-            viewRouter.currentPage = 2
-            userMoney.num -= 10
         }
         else {
             displayMessage = "Please enter only numbers"
@@ -68,7 +70,26 @@ struct ContentView: View {
         for item in userDeck {
             cardTotal += item.value
         }
-        print(cardTotal)
+        if cardTotal == 21 {
+            // win stuff
+            userMoney.num += (bet.num * 1.5)
+        }
+        else {
+            userMoney.num -= bet.num
+        }
+    }
+    func checkForNaturalsDealer () {
+        var cardTotal: Int = 0
+        for item in dealerDeck {
+            cardTotal += item.value
+        }
+        if cardTotal == 21 {
+            // win stuff
+            userMoney.num += (bet.num * 1.5)
+        }
+        else {
+            userMoney.num -= bet.num
+        }
     }
 }
 

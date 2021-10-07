@@ -119,3 +119,12 @@ class IntOO: ObservableObject {
 class UserMoneyOO: ObservableObject {
     @Published var num: Float = 100
 }
+
+struct ImageDisplayer: View {
+    var body: some View {
+        Text("hi")
+    }
+}
+
+// create an observable object called image switch. Have a Hstack with an if conditional, if this is true there is an image widget
+// the input of the image widget is the image part of the card object in the user and dealer decks. Find a way to isolate this. 
