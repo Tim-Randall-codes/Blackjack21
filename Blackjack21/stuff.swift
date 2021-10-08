@@ -19,7 +19,7 @@ struct Card {
     }
 }
 
-let originalDeck: Array = [
+var originalDeck: Array = [
     Card(name: "1d", value: 1, image: "AD"),
     Card(name: "1h", value: 1, image: "AH"),
     Card(name: "1c", value: 1, image: "AC"),
@@ -74,8 +74,8 @@ let originalDeck: Array = [
     Card(name: "ks", value: 10, image: "KS")]
 
 var houseDeck: Array = originalDeck
-var userDeck: Array = [Card]()
-var dealerDeck: Array = [Card]()
+var userDeck: Array = [Card(name: "first", value: 0, image: "one")]
+var dealerDeck: Array = [Card(name: "first", value: 0, image: "one")]
 
 struct Background: View {
     var body: some View {
@@ -120,11 +120,11 @@ class UserMoneyOO: ObservableObject {
     @Published var num: Float = 100
 }
 
-struct ImageDisplayer: View {
+struct PicView: View {
+    var image: String
     var body: some View {
-        Text("hi")
+        Image(image).resizable()
+            .frame(width: 50, height: 75)
     }
 }
 
-// create an observable object called image switch. Have a Hstack with an if conditional, if this is true there is an image widget
-// the input of the image widget is the image part of the card object in the user and dealer decks. Find a way to isolate this. 

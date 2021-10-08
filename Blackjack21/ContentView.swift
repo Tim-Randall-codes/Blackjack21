@@ -30,9 +30,6 @@ struct ContentView: View {
                 Button(action:{
                     getBet()
                     getUserDeck()
-                    getUserDeck()
-                    getDealerDeck()
-                    getDealerDeck()
                     checkForNaturalsUser()
                     checkForNaturalsDealer()
                     viewRouter.currentPage = 2
@@ -54,16 +51,26 @@ struct ContentView: View {
         }
     }
     func getUserDeck () {
+        //user card one
         let randomNumber: Int = Int.random(in: 0...houseDeck.count)
         let drawnCard = houseDeck[randomNumber]
         userDeck.append(drawnCard)
         houseDeck.remove(at: randomNumber)
-    }
-    func getDealerDeck () {
-        let randomNumber: Int = Int.random(in: 0...houseDeck.count)
-        let drawnCard = houseDeck[randomNumber]
-        dealerDeck.append(drawnCard)
-        houseDeck.remove(at: randomNumber)
+        //user card two
+        let randomNumber2: Int = Int.random(in: 0...houseDeck.count)
+        let drawnCard2 = houseDeck[randomNumber2]
+        userDeck.append(drawnCard2)
+        houseDeck.remove(at: randomNumber2)
+        // dealer card one
+        let randomNumber3: Int = Int.random(in: 0...houseDeck.count)
+        let drawnCard3 = houseDeck[randomNumber3]
+        dealerDeck.append(drawnCard3)
+        houseDeck.remove(at: randomNumber3)
+        // dealer card two
+        let randomNumber4: Int = Int.random(in: 0...houseDeck.count)
+        let drawnCard4 = houseDeck[randomNumber4]
+        dealerDeck.append(drawnCard4)
+        houseDeck.remove(at: randomNumber4)
     }
     func checkForNaturalsUser () {
         var cardTotal: Int = 0
@@ -74,9 +81,6 @@ struct ContentView: View {
             // win stuff
             userMoney.num += (bet.num * 1.5)
         }
-        else {
-            userMoney.num -= bet.num
-        }
     }
     func checkForNaturalsDealer () {
         var cardTotal: Int = 0
@@ -85,9 +89,6 @@ struct ContentView: View {
         }
         if cardTotal == 21 {
             // win stuff
-            userMoney.num += (bet.num * 1.5)
-        }
-        else {
             userMoney.num -= bet.num
         }
     }

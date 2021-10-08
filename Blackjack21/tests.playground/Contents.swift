@@ -66,7 +66,7 @@ let originalDeck: Array = [
     Card(name: "kc", value: 10, image: "KC"),
     Card(name: "ks", value: 10, image: "KS")]
 let randomCard = originalDeck[Int.random(in: 0...originalDeck.count)]
-
+print(randomCard)
 let stringTest: String = "12.7444"
 if var floatTest = Float(stringTest) {
     print("the float is \(floatTest)")
