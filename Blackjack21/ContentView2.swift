@@ -27,6 +27,8 @@ struct ContentView2: View {
     @State var userSI5: Bool = false
     @State var userSI6: Bool = false
     @State var userSI7: Bool = false
+    @State var dealerTotal: Int = 0
+    @State var userTotal: Int = 0
     @State var testDisplay: String = ""
     var body: some View {
         ZStack{
@@ -106,7 +108,11 @@ struct ContentView2: View {
                     TextWidget(words: "Money: \(String(userMoney.num))")
                     HStack{
                         Button(action:{
-                            viewRouter.currentPage = 1
+                            dealerDrawAndCount()
+                            countUserCardValues()
+                            checkForAcesUser()
+                            checkForAcesDealer()
+                            testDisplay = "user \(String(userTotal)) dealer \(String(dealerTotal))"
                         }, label: {
                             ButtonWidget(words: "Hold")
                         })
@@ -147,7 +153,72 @@ struct ContentView2: View {
             userSI7 = true
         }
     }
-    func hold (){
+    func dealerDrawAndCount (){
+        dealerTotal += dealerDeck[1].value
+        dealerTotal += dealerDeck[2].value
+        if dealerTotal < 17 {
+            let randomNumber: Int = Int.random(in: 0...houseDeck.count)
+            let drawnCard = houseDeck[randomNumber]
+            dealerDeck.append(drawnCard)
+            houseDeck.remove(at: randomNumber)
+        }
+        if dealerDeck.indices.contains(3) {
+            dealerTotal += dealerDeck[3].value
+            showImage1 = true
+        }
+    }
+    func checkForAcesDealer() {
+        if dealerTotal > 21 {
+            for var item in dealerDeck {
+                if item.name == "1d" || item.name == "1s" || item.name == "1h" || item.name == "1c" {
+                    item.value = 1
+                }
+            }
+            dealerTotal = dealerDeck[1].value + dealerDeck[2].value
+            if dealerDeck.indices.contains(3) {
+                dealerTotal += dealerDeck[3].value
+            }
+        }
+    }
+    func countUserCardValues(){
+        userTotal += userDeck[1].value
+        userTotal += userDeck[2].value
+        if userDeck.indices.contains(3) {
+            userTotal += userDeck[3].value
+        }
+        if userDeck.indices.contains(4) {
+            userTotal += userDeck[4].value
+        }
+        if userDeck.indices.contains(5) {
+            userTotal += userDeck[5].value
+        }
+        if userDeck.indices.contains(6) {
+            userTotal += userDeck[6].value
+        }
+        if userDeck.indices.contains(7) {
+            userTotal += userDeck[7].value
+        }
+        if userDeck.indices.contains(8) {
+            userTotal += userDeck[8].value
+        }
+        if userDeck.indices.contains(9) {
+            userTotal += userDeck[9].value
+        }
+    }
+    func checkForAcesUser(){
+        if userTotal > 21 {
+            for var item in userDeck {
+                if item.name == "1d" || item.name == "1s" || item.name == "1h" || item.name == "1c" {
+                    item.value = 1
+                }
+            }
+            userTotal = userDeck[1].value + userDeck[2].value
+            if userDeck.indices.contains(3) {
+                userTotal += userDeck[3].value
+            }
+        }
+    }
+    func compareTotalsAndAllocateBet(){
         
     }
 }

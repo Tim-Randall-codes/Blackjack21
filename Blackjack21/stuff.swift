@@ -20,10 +20,10 @@ struct Card {
 }
 
 var originalDeck: Array = [
-    Card(name: "1d", value: 1, image: "AD"),
-    Card(name: "1h", value: 1, image: "AH"),
-    Card(name: "1c", value: 1, image: "AC"),
-    Card(name: "1s", value: 1, image: "AS"),
+    Card(name: "1d", value: 11, image: "AD"),
+    Card(name: "1h", value: 11, image: "AH"),
+    Card(name: "1c", value: 11, image: "AC"),
+    Card(name: "1s", value: 11, image: "AS"),
     Card(name: "2d", value: 2, image: "2D"),
     Card(name: "2h", value: 2, image: "2H"),
     Card(name: "2c", value: 2, image: "2C"),

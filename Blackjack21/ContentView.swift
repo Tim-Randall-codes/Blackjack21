@@ -52,22 +52,22 @@ struct ContentView: View {
     }
     func getUserDeck () {
         //user card one
-        let randomNumber: Int = Int.random(in: 0...houseDeck.count)
+        let randomNumber: Int = Int.random(in: 0..<houseDeck.count)
         let drawnCard = houseDeck[randomNumber]
         userDeck.append(drawnCard)
         houseDeck.remove(at: randomNumber)
         //user card two
-        let randomNumber2: Int = Int.random(in: 0...houseDeck.count)
+        let randomNumber2: Int = Int.random(in: 0..<houseDeck.count)
         let drawnCard2 = houseDeck[randomNumber2]
         userDeck.append(drawnCard2)
         houseDeck.remove(at: randomNumber2)
         // dealer card one
-        let randomNumber3: Int = Int.random(in: 0...houseDeck.count)
+        let randomNumber3: Int = Int.random(in: 0..<houseDeck.count)
         let drawnCard3 = houseDeck[randomNumber3]
         dealerDeck.append(drawnCard3)
         houseDeck.remove(at: randomNumber3)
         // dealer card two
-        let randomNumber4: Int = Int.random(in: 0...houseDeck.count)
+        let randomNumber4: Int = Int.random(in: 0..<houseDeck.count)
         let drawnCard4 = houseDeck[randomNumber4]
         dealerDeck.append(drawnCard4)
         houseDeck.remove(at: randomNumber4)
@@ -79,7 +79,7 @@ struct ContentView: View {
         }
         if cardTotal == 21 {
             // win stuff
-            userMoney.num += (bet.num * 1.5)
+            //userMoney.num += (bet.num * 1.5)
         }
     }
     func checkForNaturalsDealer () {
@@ -89,7 +89,7 @@ struct ContentView: View {
         }
         if cardTotal == 21 {
             // win stuff
-            userMoney.num -= bet.num
+            //userMoney.num -= bet.num
         }
     }
 }
