@@ -74,3 +74,8 @@ if var floatTest = Float(stringTest) {
 else {
     print("This string will not turn into a float")
 }
+
+let names: Array = ["Tim", "Lisa", "Qiuling"]
+if names.indices.contains(3) {
+    print(names[1])
+}

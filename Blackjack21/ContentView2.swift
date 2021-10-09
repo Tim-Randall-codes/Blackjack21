@@ -20,14 +20,22 @@ struct ContentView2: View {
     @State var showImage5: Bool = false
     @State var showImage6: Bool = false
     @State var showImage7: Bool = false
-    @State var display: String = ""
+    @State var userSI: Bool = false
+    @State var userSI2: Bool = false
+    @State var userSI3: Bool = false
+    @State var userSI4: Bool = false
+    @State var userSI5: Bool = false
+    @State var userSI6: Bool = false
+    @State var userSI7: Bool = false
+    @State var testDisplay: String = ""
     var body: some View {
         ZStack{
             Background()
             VStack{
-                TextWidget(words: "Blackjack 21")
-                TextWidget(words: "Dealer:")
-                Text(display)
+                Group{
+                    TextWidget(words: "Blackjack 21")
+                    TextWidget(words: "Dealer:")
+                }
                 HStack {
                     PicView(image: dealerDeck[1].image)
                     PicView(image: dealerDeck[2].image)
@@ -54,21 +62,93 @@ struct ContentView2: View {
                     }
                 }
                 TextWidget(words: "Player")
-                TextWidget(words: "Money: \(String(userMoney.num))")
+                TextWidget(words: testDisplay)
                 HStack{
-                    Button(action:{
-                        viewRouter.currentPage = 1
-                    }, label: {
-                        ButtonWidget(words: "Hold")
-                    })
-                    Button(action:{
-                        display = dealerDeck[1].name
-                    }, label: {
-                        ButtonWidget(words: "Draw")
-                    })
+                    PicView(image: userDeck[1].image)
+                    PicView(image: userDeck[2].image)
+                    if userSI == true {
+                        if userDeck.indices.contains(3) {
+                            PicView(image: userDeck[3].image)
+                        }
+                    }
+                    if userSI2 == true {
+                        if userDeck.indices.contains(4) {
+                            PicView(image: userDeck[4].image)
+                        }
+                    }
+                    if userSI3 == true {
+                        if userDeck.indices.contains(5) {
+                            PicView(image: userDeck[5].image)
+                        }
+                    }
+                    if userSI4 == true {
+                        if userDeck.indices.contains(6) {
+                            PicView(image: userDeck[6].image)
+                        }
+                    }
+                    if userSI5 == true {
+                        if userDeck.indices.contains(7) {
+                            PicView(image: userDeck[7].image)
+                        }
+                    }
+                    if userSI6 == true {
+                        if userDeck.indices.contains(8) {
+                            PicView(image: userDeck[8].image)
+                        }
+                    }
+                    if userSI7 == true {
+                        if userDeck.indices.contains(9) {
+                            PicView(image: userDeck[9].image)
+                        }
+                    }
+                }
+                Group{
+                    TextWidget(words: "Money: \(String(userMoney.num))")
+                    HStack{
+                        Button(action:{
+                            viewRouter.currentPage = 1
+                        }, label: {
+                            ButtonWidget(words: "Hold")
+                        })
+                        Button(action:{
+                            drawCard()
+                        }, label: {
+                            ButtonWidget(words: "Draw")
+                        })
+                    }
                 }
             }
         }
+    }
+    func drawCard (){
+        let randomNumber: Int = Int.random(in: 0...houseDeck.count)
+        let drawnCard = houseDeck[randomNumber]
+        userDeck.append(drawnCard)
+        houseDeck.remove(at: randomNumber)
+        if userDeck.indices.contains(2) {
+            userSI = true
+        }
+        if userDeck.indices.contains(3) {
+            userSI2 = true
+        }
+        if userDeck.indices.contains(4) {
+            userSI3 = true
+        }
+        if userDeck.indices.contains(5) {
+            userSI4 = true
+        }
+        if userDeck.indices.contains(6) {
+            userSI5 = true
+        }
+        if userDeck.indices.contains(7) {
+            userSI6 = true
+        }
+        if userDeck.indices.contains(8) {
+            userSI7 = true
+        }
+    }
+    func hold (){
+        
     }
 }
 

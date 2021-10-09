@@ -9,13 +9,23 @@ import SwiftUI
 
 struct ContentView3: View {
     @StateObject var viewRouter: ViewRouter
+    @ObservedObject var userMoney: UserMoneyOO
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            Background()
+            VStack{
+                TextWidget(words: "Results!")
+                TextWidget(words: "You got: ")
+                TextWidget(words: "The dealer got: ")
+                TextWidget(words: "won ")
+                TextWidget(words: "You have \(String(userMoney.num))")
+            }
+        }
     }
 }
 
 struct ContentView3_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView3(viewRouter: ViewRouter())
+        ContentView3(viewRouter: ViewRouter(), userMoney: UserMoneyOO())
     }
 }

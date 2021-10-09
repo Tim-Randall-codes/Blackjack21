@@ -19,7 +19,7 @@ struct MotherView: View {
             ContentView2(viewRouter: viewRouter, bet: bet, userMoney: userMoney)
         }
         else if viewRouter.currentPage == 3 {
-            ContentView3(viewRouter: viewRouter)
+            ContentView3(viewRouter: viewRouter, userMoney: userMoney)
         }
         else if viewRouter.currentPage == 4 {
             ContentView4(viewRouter: viewRouter)
