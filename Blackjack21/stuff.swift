@@ -128,3 +128,6 @@ struct PicView: View {
     }
 }
 
+class StringOO: ObservableObject {
+    @Published var words: String = ""
+}

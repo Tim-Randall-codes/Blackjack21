@@ -11,8 +11,10 @@ struct ContentView: View {
     @StateObject var viewRouter: ViewRouter
     @StateObject var bet: IntOO
     @StateObject var userMoney: UserMoneyOO
+    @StateObject var winner: StringOO
     @State var betString: String = ""
     @State var displayMessage: String = ""
+    @State var gotNatural: Bool = false
     var body: some View {
         ZStack{
             Background()
@@ -32,7 +34,9 @@ struct ContentView: View {
                     getUserDeck()
                     checkForNaturalsUser()
                     checkForNaturalsDealer()
-                    viewRouter.currentPage = 2
+                    if gotNatural == false {
+                        viewRouter.currentPage = 2
+                    }
                 }, label:{
                     ButtonWidget(words: "Gamble On!!")
                 })
@@ -78,8 +82,10 @@ struct ContentView: View {
             cardTotal += item.value
         }
         if cardTotal == 21 {
-            // win stuff
-            //userMoney.num += (bet.num * 1.5)
+            userMoney.num += (bet.num * 1.5)
+            winner.words = "User"
+            gotNatural = true
+            viewRouter.currentPage = 3
         }
     }
     func checkForNaturalsDealer () {
@@ -88,8 +94,10 @@ struct ContentView: View {
             cardTotal += item.value
         }
         if cardTotal == 21 {
-            // win stuff
-            //userMoney.num -= bet.num
+            userMoney.num -= bet.num
+            winner.words = "Dealer"
+            gotNatural = true
+            viewRouter.currentPage = 3
         }
     }
 }
@@ -98,6 +106,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(viewRouter: ViewRouter(), bet: IntOO(), userMoney: UserMoneyOO())
+        ContentView(viewRouter: ViewRouter(), bet: IntOO(), userMoney: UserMoneyOO(), winner: StringOO())
     }
 }

@@ -11,8 +11,11 @@ import SwiftUI
 // image max is nine across
 struct ContentView2: View {
     @StateObject var viewRouter: ViewRouter
-    @StateObject var bet: IntOO
+    @ObservedObject var bet: IntOO
+    @StateObject var userScore: IntOO
+    @StateObject var dealerScore: IntOO
     @StateObject var userMoney: UserMoneyOO
+    @StateObject var winner: StringOO
     @State var showImage1: Bool = false
     @State var showImage2: Bool = false
     @State var showImage3: Bool = false
@@ -36,6 +39,7 @@ struct ContentView2: View {
             VStack{
                 Group{
                     TextWidget(words: "Blackjack 21")
+                    TextWidget(words: "You bet: \(String(bet.num))")
                     TextWidget(words: "Dealer:")
                 }
                 HStack {
@@ -112,7 +116,11 @@ struct ContentView2: View {
                             countUserCardValues()
                             checkForAcesUser()
                             checkForAcesDealer()
+                            compareTotalsAndAllocateBet()
+                            viewRouter.currentPage = 3
                             testDisplay = "user \(String(userTotal)) dealer \(String(dealerTotal))"
+                            userScore.num = Float(userTotal)
+                            dealerScore.num = Float(dealerTotal)
                         }, label: {
                             ButtonWidget(words: "Hold")
                         })
@@ -127,7 +135,7 @@ struct ContentView2: View {
         }
     }
     func drawCard (){
-        let randomNumber: Int = Int.random(in: 0...houseDeck.count)
+        let randomNumber: Int = Int.random(in: 0..<houseDeck.count)
         let drawnCard = houseDeck[randomNumber]
         userDeck.append(drawnCard)
         houseDeck.remove(at: randomNumber)
@@ -157,7 +165,7 @@ struct ContentView2: View {
         dealerTotal += dealerDeck[1].value
         dealerTotal += dealerDeck[2].value
         if dealerTotal < 17 {
-            let randomNumber: Int = Int.random(in: 0...houseDeck.count)
+            let randomNumber: Int = Int.random(in: 0..<houseDeck.count)
             let drawnCard = houseDeck[randomNumber]
             dealerDeck.append(drawnCard)
             houseDeck.remove(at: randomNumber)
@@ -169,14 +177,10 @@ struct ContentView2: View {
     }
     func checkForAcesDealer() {
         if dealerTotal > 21 {
-            for var item in dealerDeck {
+            for item in dealerDeck {
                 if item.name == "1d" || item.name == "1s" || item.name == "1h" || item.name == "1c" {
-                    item.value = 1
+                    userTotal -= 10
                 }
-            }
-            dealerTotal = dealerDeck[1].value + dealerDeck[2].value
-            if dealerDeck.indices.contains(3) {
-                dealerTotal += dealerDeck[3].value
             }
         }
     }
@@ -207,24 +211,40 @@ struct ContentView2: View {
     }
     func checkForAcesUser(){
         if userTotal > 21 {
-            for var item in userDeck {
+            for item in userDeck {
                 if item.name == "1d" || item.name == "1s" || item.name == "1h" || item.name == "1c" {
-                    item.value = 1
+                    userTotal -= 10
                 }
-            }
-            userTotal = userDeck[1].value + userDeck[2].value
-            if userDeck.indices.contains(3) {
-                userTotal += userDeck[3].value
             }
         }
     }
     func compareTotalsAndAllocateBet(){
-        
+        if userTotal <= 21 && dealerTotal > 21 {
+            userMoney.num += bet.num
+            winner.words = "You"
+        }
+        else if dealerTotal <= 21 && userTotal > 21 {
+            userMoney.num -= bet.num
+            winner.words = "Dealer"
+        }
+        else if userTotal == dealerTotal {
+            winner.words = "Draw"
+        }
+        else if userTotal <= 21 && dealerTotal <= 21 {
+            if (21 - userTotal) > (21 - dealerTotal) {
+                userMoney.num -= bet.num
+                winner.words = "Dealer"
+            }
+            else {
+                userMoney.num += bet.num
+                winner.words = "You"
+            }
+        }
     }
 }
 
 struct ContentView2_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView2(viewRouter: ViewRouter(), bet: IntOO(), userMoney: UserMoneyOO())
+        ContentView2(viewRouter: ViewRouter(), bet: IntOO(), userScore: IntOO(), dealerScore: IntOO(), userMoney: UserMoneyOO(), winner: StringOO())
     }
 }
