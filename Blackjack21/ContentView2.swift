@@ -135,6 +135,7 @@ struct ContentView2: View {
         }
     }
     func drawCard (){
+        testDisplay = "it's here"
         let randomNumber: Int = Int.random(in: 0..<houseDeck.count)
         let drawnCard = houseDeck[randomNumber]
         userDeck.append(drawnCard)

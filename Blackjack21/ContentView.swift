@@ -15,6 +15,9 @@ struct ContentView: View {
     @State var betString: String = ""
     @State var displayMessage: String = ""
     @State var gotNatural: Bool = false
+    @State var isNumberPass: Bool = false
+    @State var isOverZeroPass: Bool = false
+    @State var isUnder100: Bool = false
     var body: some View {
         ZStack{
             Background()
@@ -30,12 +33,14 @@ struct ContentView: View {
                 TextField("Enter your bet here", text: $betString).fixedSize()
                     .frame(width: 200, height: 50)
                 Button(action:{
-                    getBet()
-                    getUserDeck()
-                    checkForNaturalsUser()
-                    checkForNaturalsDealer()
-                    if gotNatural == false {
-                        viewRouter.currentPage = 2
+                    checkBet()
+                    if isNumberPass == true && isOverZeroPass == true && isUnder100 == true {
+                        getUserDeck()
+                        checkForNaturalsUser()
+                        checkForNaturalsDealer()
+                        if gotNatural == false {
+                            viewRouter.currentPage = 2
+                        }
                     }
                 }, label:{
                     ButtonWidget(words: "Gamble On!!")
@@ -45,13 +50,30 @@ struct ContentView: View {
             .keyboardType(.decimalPad)
         }
     }
-    func getBet () {
+    func checkBet () {
+        // is a number
         if let betFloat = Float(betString) {
-            displayMessage = ""
             bet.num = betFloat
+            isNumberPass = true
         }
         else {
             displayMessage = "Please enter only numbers"
+            isNumberPass = false
+        }
+        //is not empty
+        if betString == "" {
+            displayMessage = "Please enter a number"
+            isOverZeroPass = false
+        }
+        else {
+            isOverZeroPass = true
+        }
+        if bet.num > 100 {
+            displayMessage = "You only have $100"
+            isUnder100 = false
+        }
+        else {
+            isUnder100 = true
         }
     }
     func getUserDeck () {
