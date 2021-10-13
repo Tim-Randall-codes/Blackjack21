@@ -18,7 +18,8 @@ struct ContentView3: View {
         ZStack{
             Background()
             VStack{
-                TextWidget(words: "Results!")
+                Title(words: "Results!")
+                Spacer()
                 TextWidget(words: "You got: \(String(userScore.num))")
                 TextWidget(words: "The dealer got: \(String(dealerScore.num))")
                 TextWidget(words: "\(winner.words) won \(String(bet.num))")
@@ -29,9 +30,12 @@ struct ContentView3: View {
                     dealerScore.num = 0
                     winner.words = ""
                     viewRouter.currentPage = 1
+                    userDeck = [Card(name: "first", value: 0, image: "one")]
+                    dealerDeck = [Card(name: "first", value: 0, image: "one")]
                 }, label:{
                     ButtonWidget(words: "Continue")
                 })
+                Spacer()
             }
         }
     }

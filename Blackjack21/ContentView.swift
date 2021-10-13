@@ -28,7 +28,7 @@ struct ContentView: View {
                     .frame(width: 100, height: 150)
                 Spacer()
                 TextWidget(words: displayMessage)
-                TextWidget(words: "You have.")
+                TextWidget(words: "You have $\(String(userMoney.num)).")
                 TextWidget(words: "How much would you like to bet?")
                 TextField("Enter your bet here", text: $betString).fixedSize()
                     .frame(width: 200, height: 50)
@@ -68,8 +68,8 @@ struct ContentView: View {
         else {
             isOverZeroPass = true
         }
-        if bet.num > 100 {
-            displayMessage = "You only have $100"
+        if bet.num > userMoney.num {
+            displayMessage = "You only have $\(String(userMoney.num))"
             isUnder100 = false
         }
         else {
@@ -105,7 +105,7 @@ struct ContentView: View {
         }
         if cardTotal == 21 {
             userMoney.num += (bet.num * 1.5)
-            winner.words = "User"
+            winner.words = "User with a natural"
             gotNatural = true
             viewRouter.currentPage = 3
         }
@@ -117,7 +117,7 @@ struct ContentView: View {
         }
         if cardTotal == 21 {
             userMoney.num -= bet.num
-            winner.words = "Dealer"
+            winner.words = "Dealer with a natural"
             gotNatural = true
             viewRouter.currentPage = 3
         }

@@ -38,7 +38,8 @@ struct ContentView2: View {
             Background()
             VStack{
                 Group{
-                    TextWidget(words: "Blackjack 21")
+                    Title(words: "Blackjack 21")
+                    Spacer()
                     TextWidget(words: "You bet: \(String(bet.num))")
                     TextWidget(words: "Dealer:")
                 }
@@ -68,7 +69,6 @@ struct ContentView2: View {
                     }
                 }
                 TextWidget(words: "Player")
-                TextWidget(words: testDisplay)
                 HStack{
                     PicView(image: userDeck[1].image)
                     PicView(image: userDeck[2].image)
@@ -117,10 +117,15 @@ struct ContentView2: View {
                             checkForAcesUser()
                             checkForAcesDealer()
                             compareTotalsAndAllocateBet()
-                            viewRouter.currentPage = 3
                             testDisplay = "user \(String(userTotal)) dealer \(String(dealerTotal))"
                             userScore.num = Float(userTotal)
                             dealerScore.num = Float(dealerTotal)
+                            if userMoney.num > 0 {
+                                viewRouter.currentPage = 3
+                            }
+                            else {
+                                viewRouter.currentPage = 4
+                            }
                         }, label: {
                             ButtonWidget(words: "Hold")
                         })
@@ -130,6 +135,7 @@ struct ContentView2: View {
                             ButtonWidget(words: "Draw")
                         })
                     }
+                    Spacer()
                 }
             }
         }
@@ -229,7 +235,7 @@ struct ContentView2: View {
             winner.words = "Dealer"
         }
         else if userTotal == dealerTotal {
-            winner.words = "Draw"
+            winner.words = "No one!"
         }
         else if userTotal <= 21 && dealerTotal <= 21 {
             if (21 - userTotal) > (21 - dealerTotal) {
